@@ -67,7 +67,9 @@ public class EmailGeneratorService {
             prompt.append("Use the following tone for the mail: ").append(emailRequest.getTone());
         prompt.append("\nEnsure the response is formatted as a proper email with a greeting, body, and closing.");
         prompt.append("\nIf the response does not contain a greeting, add one such as 'Dear [Recipient],' or 'Hi [Recipient],'.");
-        prompt.append("\nIf the response does not contain a closing, add one such as 'Best regards,' followed by a placeholder for the sender's name.");
+        prompt.append("\nIf the response does not contain a closing, add one such as 'Best regards,' followed by '")
+                .append(emailRequest.getSenderName())
+                .append("'.");
         prompt.append("\n Original email: \n").append(emailRequest.getEmailContent());
         return prompt.toString();
     }
