@@ -1,4 +1,4 @@
-## Email Reply Generator
+## AI-Powered Email Reply Generator
 - This Email Reply Generator application is a web-based tool that automatically generates email replies based on the provided email content and an optional tone selection. 
 - The application leverages React.js on the frontend and Spring Boot with Gemini API on the backend to generate AI-powered email replies.
 
