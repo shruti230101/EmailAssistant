@@ -74,7 +74,7 @@ public class EmailGeneratorService {
         }
         prompt.append("\nEnsure the response is formatted as a proper email with a greeting, body, and closing.");
         prompt.append("\nIf the response does not contain a closing, add one such as 'Best regards,' followed by '")
-                .append(emailRequest.getReplierName())
+                .append(emailRequest.getReceiverName())
                 .append("'.");
         prompt.append(" Do not add an extra new line after 'Best regards,'.");
         prompt.append("\n Original email: \n").append(emailRequest.getEmailContent());

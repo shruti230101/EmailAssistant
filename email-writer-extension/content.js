@@ -18,7 +18,7 @@ function getSenderName() {
   return "User";
 }
 
-function getReplierName() {
+function getreceiverName() {
   const replierElement = document.querySelector("a[aria-label*='Google Account']");
   if (replierElement) {
     const ariaLabel = replierElement.getAttribute("aria-label");
@@ -71,7 +71,7 @@ function injectButton() {
 
         const emailContent = getEmailContent();
         const senderName = getSenderName();
-        const replierName = getReplierName();
+        const receiverName = getreceiverName();
 
         const response = await fetch('http://localhost:8080/api/email/generate-email', {
           method: 'POST',
@@ -82,7 +82,7 @@ function injectButton() {
             emailContent: emailContent,
             senderName: senderName,
             tone: "professional",
-            replierName: replierName,
+            receiverName: receiverName,
           }) 
         });
         if(! response.ok) {
