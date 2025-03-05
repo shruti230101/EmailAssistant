@@ -19,7 +19,7 @@
 4. Extension: Chrome extension using JS, Content Scripts, Mutation Observers
 
 ## How It Works
-Enter the email content and choose the tone from the dropdown. Then click the Generate Reply button.
+Enter the email content, sender's name, reciever's name and choose the tone from the dropdown. Then click the Generate Reply button.
 The app sends a request to the backend API. The backend generates the reply using the Gemini AI API.
 The reply is displayed, and you can copy it to the clipboard.
 Additionally, the Chrome Extension automatically injects an AI Reply button into Gmail's compose window to generate replies without leaving Gmail.
@@ -42,7 +42,9 @@ Additionally, the Chrome Extension automatically injects an AI Reply button into
 - Request Body
   {
     "emailContent": "string",
-    "tone": "string (optional)"
+    "tone": "string (optional)",
+    "senderName": "string",
+    "receiverName": "string"
   }
 
 - Response
