@@ -65,11 +65,18 @@ public class EmailGeneratorService {
         prompt.append("Generate an email reply for the provided email. Do not generate a subject line.");
         if(emailRequest.getTone() != null && !emailRequest.getTone().isEmpty())
             prompt.append("Use the following tone for the mail: ").append(emailRequest.getTone());
+        if (emailRequest.getSenderName() != null && !emailRequest.getSenderName().isEmpty()) {
+            prompt.append("\nStart the email with a greeting such as 'Dear ")
+                    .append(emailRequest.getSenderName())
+                    .append(",' or 'Hi ")
+                    .append(emailRequest.getSenderName())
+                    .append(",'");
+        }
         prompt.append("\nEnsure the response is formatted as a proper email with a greeting, body, and closing.");
-        prompt.append("\nIf the response does not contain a greeting, add one such as 'Dear [Recipient],' or 'Hi [Recipient],'.");
         prompt.append("\nIf the response does not contain a closing, add one such as 'Best regards,' followed by '")
-                .append(emailRequest.getSenderName())
+                .append(emailRequest.getReplierName())
                 .append("'.");
+        prompt.append(" Do not add an extra new line after 'Best regards,'.");
         prompt.append("\n Original email: \n").append(emailRequest.getEmailContent());
         return prompt.toString();
     }
