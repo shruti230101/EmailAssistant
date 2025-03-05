@@ -10,6 +10,27 @@ function createAIButton() {
   return button;
 }
 
+function getSenderName() {
+  const senderElement = document.querySelector('.gD span');
+  if (senderElement) {
+    return senderElement.innerText.split(" ")[0].trim();
+  }
+  return "User";
+}
+
+function getReplierName() {
+  const replierElement = document.querySelector("a[aria-label*='Google Account']");
+  if (replierElement) {
+    const ariaLabel = replierElement.getAttribute("aria-label");
+    const match = ariaLabel.match(/: (.*?)\s*\(/);
+    if (match && match[1]) {
+      return match[1].trim(); 
+    }
+    return "User";
+  }
+  return "User";
+}
+
 function findComposeToolbar() {
   const selectors = ['.btC', '.aDh', '[role="toolbar"]', '.gU.Up'];
   for(const selector of selectors) {
@@ -49,6 +70,9 @@ function injectButton() {
         button.disabled = true;
 
         const emailContent = getEmailContent();
+        const senderName = getSenderName();
+        const replierName = getReplierName();
+
         const response = await fetch('http://localhost:8080/api/email/generate-email', {
           method: 'POST',
           headers: {
@@ -56,7 +80,9 @@ function injectButton() {
           },
           body: JSON.stringify({
             emailContent: emailContent,
+            senderName: senderName,
             tone: "professional",
+            replierName: replierName,
           }) 
         });
         if(! response.ok) {
